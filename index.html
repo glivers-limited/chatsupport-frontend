@@ -1,0 +1,184 @@
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    <style type="text/css">
+    #chat-pannel {
+      width: 300px;
+    }
+    #chat-bar {
+      bottom: 0;
+      right: 10;
+      position: fixed;
+    }
+    #chat-loginbox {
+      bottom: -375;
+      right: 10;
+      position: fixed;
+    }
+    #chat-signupbox {
+      bottom: -475;
+      right: 10;
+      position: fixed;
+    }
+    #chat-box {
+      bottom: -375;
+      right: 10;
+      position: fixed;
+    }
+    .mainbox {
+      width: 300px;
+    }
+    </style>
+    <body>
+        <div id="chat-pannel">    
+            <div class="mainbox" id="chat-bar">
+              <div class="panel panel-info" >
+                  <div class="panel-heading">
+                      <div class="panel-title">
+                        <label style="cursor:pointer" id="chat-bar-icon">Live Chat</label>
+                      </div>
+                  </div>  
+              </div>
+            </div>
+
+            <div id="chat-box" class="mainbox">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                      <label class="chat-user-name"></label>
+                      <label id="chat-box-icon" style="float:right; cursor:pointer;"> - </label>
+                    </div>
+                </div>  
+                <div style="padding-top:30px" class="panel-body">
+                  chat window here
+                </div>   
+              </div>
+            </div>
+
+            <div id="chat-loginbox" class="mainbox">             
+                <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                          <label>Sign In</label>
+                          <label id="chat-loginbox-icon" style="float:right; cursor:pointer;"> - </label>
+                        </div>
+                    </div>     
+
+                    <div style="padding-top:30px" class="panel-body" >
+                            
+                        <form id="loginForm" class="form-horizontal" role="form" action="javascript:void(0)">
+                            
+                            <div style="margin-bottom: 25px" class="input-group">
+                                 <div style="display:none" id="login-alert" class="col-sm-12"></div>
+                            </div>        
+
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="login-username" required type="email" class="form-control" name="email" value="" placeholder="email">                                        
+                            </div>
+                                
+                            <div style="margin-bottom: 25px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="login-password" required type="password" class="form-control" name="password" placeholder="password">
+                            </div>
+                            <div class="input-group">
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 controls">
+                                      <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Login</button>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                            Don't have an account! 
+                                        <a href="javascript:;" id="chat-signup-link">
+                                            Sign Up Here
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>   
+                        </form>     
+                    </div>                     
+                </div>  
+            </div>
+            <div id="chat-signupbox" class="mainbox">
+               <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                          <label>Sign Up</label>
+                          <label id="chat-signupbox-icon" style="float:right; cursor:pointer;"> - </label>
+                        </div>
+                    </div>     
+
+                    <div class="panel-body" >
+                            
+                        <form id="signUpForm" class="form-horizontal" role="form" action="javascript:void(0)">
+
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <p style="display:none" id="signup-alert" class="col-sm-12"></p>                                 
+                            </div>
+                                    
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="chat-signup-useremail" required type="email" class="form-control" name="email" value="" placeholder="Your Email*">                                        
+                            </div>
+
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="chat-signup-firstname" required type="text" class="form-control" name="fname" value="" placeholder="First Name*">                                        
+                            </div>
+
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                <input id="chat-signup-lastname" required type="text" class="form-control" name="lname" value="" placeholder="Last Name*">                                        
+                            </div>
+                                
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="chat-signup-password" required type="password" class="form-control" name="password" placeholder="Enter Password*">
+                            </div>
+
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                <input id="chat-signup-confirm-password" required type="password" class="form-control" name="cpassword" placeholder="Confirm Password*">
+                            </div>
+
+                            <div class="input-group">
+                                <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+                                    <div class="col-sm-12 controls">
+                                      <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Sign Up</button>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:0px; font-size:85%" >
+                                            Already registered?
+                                        <a href="javascript:;" id="chat-login-link">
+                                            Login Here
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>   
+                        </form>     
+                    </div>                     
+                </div>
+            </div> 
+        </div>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>
