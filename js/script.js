@@ -67,8 +67,17 @@
 			method: "GET",
 			dataType: "json",
 		  	url: baseUrl + "/users/isLogined",
+		  	xhrFields: {
+		       withCredentials: true
+		    },
+		    crossDomain: true,
 		  	success: function (data) {
-		  		isLogined = data;
+		  		if(data.isLogined) {
+		  			user = data.user;
+		  			isLogined = true;
+		  		} else {
+		  			isLogined = false;
+		  		}
 		  	},
 		  	error: function (error) {
 		  		console.log(error);
@@ -102,6 +111,10 @@
 		  	dataType: "json",
 		  	url: baseUrl + "/users/login",
 		  	data: formData,
+		  	xhrFields: {
+		       withCredentials: true
+		    },
+		    crossDomain: true,
 		  	success: function (data) {
 	  			// body...
 	  			if(data.success) {
