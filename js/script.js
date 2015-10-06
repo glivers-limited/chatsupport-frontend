@@ -10,7 +10,8 @@
 		isLogined = false, 
 		user = new Object(),
 		signUpTimeOut,
-		loginTimeOut;
+		loginTimeOut,
+		socket;
 	//loading setting file
 	var setting = $.getJSON( "js/setting.json");
 	setting.done(function(data) {
@@ -19,6 +20,7 @@
   		host = data[env].host || "127.0.0.1";
   		protocol = data[env].protocol || "http";
   		baseUrl = protocol + "://" + host + ":" + port;
+  		socket = io.connect(baseUrl);
   		isUserLogined();
 	});
 	
@@ -62,6 +64,20 @@
 		$("#chat-bar").animate({"bottom": "0px" }, "normal" );
 	}
 
+	function initSocket() {
+		socket.emit('subscribe', user);
+
+		// socket.emit('send message', {
+		//     room: conversation_id,
+		//     message: "Some message"
+		// });
+
+		// socket.on('conversation private post', function(data) {
+		//     //display data.message
+		// });
+
+	}
+
 	function isUserLogined() {
 		$.ajax({
 			method: "GET",
@@ -75,6 +91,7 @@
 		  		if(data.isLogined) {
 		  			user = data.user;
 		  			isLogined = true;
+		  			initSocket();
 		  		} else {
 		  			isLogined = false;
 		  		}
@@ -121,6 +138,7 @@
 	  				isLogined = true;
 	  				user = data.user;
 	  				setChatWindow();
+	  				initSocket();
 	  			}
 		  		else setMessageLoginBox(data.err);
 		  	}
