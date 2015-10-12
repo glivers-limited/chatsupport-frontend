@@ -11,7 +11,8 @@
 		user = new Object(),
 		signUpTimeOut,
 		loginTimeOut,
-		socket;
+		socket,
+		newMessageCount = 0;
 	//loading setting file
 	var setting = $.getJSON( "js/setting.json");
 	setting.done(function(data) {
@@ -22,6 +23,16 @@
   		baseUrl = protocol + "://" + host + ":" + port;
   		socket = io.connect(baseUrl);
   		isUserLogined();
+  		socket.on('conversation private post', function(data) {
+		    //display data.message
+		    if($("#chat-bar").css("bottom") == "0px") {
+		    	newMessageCount += 1;
+		    	$(".new-message-count").text(newMessageCount + " new message");
+		    }
+		    $(".old-clat").append("<li style='height:30px;'><span class='server-message'>"+data.message+"</span></li>");
+		    // if($(".old-clat").parent().height() > $(".old-clat").height())
+		    // 	$(".old-clat").css("top",$(".old-clat").parent().height() - $(".old-clat").height());
+		});
 	});
 	
 	setting.fail(function() {
@@ -30,10 +41,19 @@
 
 	function setChatWindow() {
 		if(isLogined) {
+			newMessageCount = 0;
+			$(".new-message-count").text('');
 			$("#chat-bar").animate({"bottom": "-=375px" }, "normal" );
 			$("#chat-loginbox").animate({"bottom": "-=375px" }, "normal" );
 			$(".chat-user-name").text(user.fname + " " + user.lname);
 			$("#chat-box").animate({"bottom": "0px" }, "normal" );
+			$("#gliver-new-message").keydown(function (e) {
+              if (e.keyCode == 13 && $(this).val() != '') {
+                socket.emit('send message', {message:$(this).val(), id:user._id});
+                $(".old-clat").append("<li style='height:30px;'><span class='my-message'>"+$(this).val()+"</span></li>");
+                $(this).val('');
+              }
+            });
 		} else {
 			$("#chat-bar").animate({"bottom": "-=375px" }, "normal" );
 			$("#chat-signupbox").animate({"bottom": "-=475px" }, "normal" );
@@ -58,6 +78,7 @@
 	}
 
 	function showChatBar() {
+		$(".new-message-count").text('');
 		$("#chat-loginbox").animate({"bottom": "-=375px" }, "normal" );
 		$("#chat-signupbox").animate({"bottom": "-=475px" }, "normal" );
 		$("#chat-box").animate({"bottom": "-=375px" }, "normal" );
@@ -74,8 +95,11 @@
 
 		// socket.on('conversation private post', function(data) {
 		//     //display data.message
+		//     console.log(data.message);
 		// });
-
+		// socket.on("private", function(message) {
+		// 	console.log(message);
+		// });
 	}
 
 	function isUserLogined() {

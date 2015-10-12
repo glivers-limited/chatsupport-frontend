@@ -35,6 +35,24 @@
     .mainbox {
       width: 300px;
     }
+    .server-message {
+      float: left;
+      background: lightgray;
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      border-radius: 2px;
+    }
+    .my-message {
+      float: right;
+      background: lightblue;
+      padding-right: 5px;
+      padding-left: 5px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      border-radius: 2px;
+    }
     </style>
     <body>
         <div id="chat-pannel">    
@@ -42,7 +60,7 @@
               <div class="panel panel-info" >
                   <div class="panel-heading">
                       <div class="panel-title">
-                        <label style="cursor:pointer" id="chat-bar-icon">Live Chat</label>
+                        <label style="cursor:pointer" id="chat-bar-icon">Live Chat <span class="new-message-count" style="font-size:10px; font-weight:normal; color:gray"></span></label>
                       </div>
                   </div>  
               </div>
@@ -56,8 +74,14 @@
                       <label id="chat-box-icon" style="float:right; cursor:pointer;"> - </label>
                     </div>
                 </div>  
-                <div style="padding-top:30px" class="panel-body">
-                  chat window here
+                <div>
+                  <div class="message-box" style="height:250px;display:table-cell;width:295px;position:relative;vertical-align:bottom;">
+                    <ul class="old-clat" style="width:100%;list-style:none;overflow-y: scroll; max-height:240px;">
+                    </ul>
+                  </div>
+                  <div class="input-box">
+                    <input type="text" class="input-text" style="height:50px; width:100%" id="gliver-new-message" />
+                  </div>
                 </div>   
               </div>
             </div>
